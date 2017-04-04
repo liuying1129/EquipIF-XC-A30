@@ -480,13 +480,13 @@ begin
     
     if ls3.Count<3 then begin ls3.Free;CONTINUE;end;
 
-    SpecNo:=ls3[1];
+    SpecNo:=rightstr('0000'+ls3[1],4);
     dlttype:='ESR';//Ñª³Á
     sValue:=ls3[2];
 
     ls3.Free;
 
-    if(trim(SpecNo)='')or(trim(sValue)='')then CONTINUE;
+    if trim(sValue)='' then CONTINUE;
     
     ReceiveItemInfo:=VarArrayCreate([0,0],varVariant);
     ReceiveItemInfo[0]:=VarArrayof([dlttype,sValue,'','']);
