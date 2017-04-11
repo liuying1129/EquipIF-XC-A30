@@ -475,14 +475,23 @@ begin
 
   for i :=0 to ls.Count-1 do
   begin
+    sValue:='';
+    dlttype:='ESR';//血沉
+    
     ls3:=TStringList.Create;
     ExtractStrings([#$20],[],Pchar(ls[i]),ls3);
-    
-    if ls3.Count<3 then begin ls3.Free;CONTINUE;end;
 
-    SpecNo:=rightstr('0000'+ls3[1],4);
-    dlttype:='ESR';//血沉
-    sValue:=ls3[2];
+    if ls3.Count=4 then//无自编号的情况
+    begin
+      SpecNo:=rightstr('0000'+ls3[1],4);
+      sValue:=ls3[2];
+    end;
+
+    if ls3.Count=5 then//有无自编号的情况
+    begin
+      SpecNo:=rightstr('0000'+ls3[2],4);
+      sValue:=ls3[3];
+    end;
 
     ls3.Free;
 
